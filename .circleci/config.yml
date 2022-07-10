@@ -118,9 +118,10 @@ jobs:
           keys: [frontend-build]
       - run:
           name: Front-end scan
-          working_directory: ./frontend
           command: |
-            npm i
+            cd frontend
+            npm install
+            npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
 
   scan-backend:
@@ -132,9 +133,11 @@ jobs:
           keys: [backend-build]
       - run:
           name: Back-end scan
-          working_directory: ./backend
           command: |
-            npm i
+            cd backend
+            npm install
+            npm audit fix --audit-level=critical --force
+            npm audit fix --force
             npm audit --audit-level=critical
 
   deploy-infrastructure:
